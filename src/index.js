@@ -41,7 +41,7 @@ function initializeCode() {
 
 function cellClicked(cell, x, y) {
   if (board_state[y][x] === "") {
-    board_state[y][x] = cell.className = symbols[activePlayer];
+    board_state[y][x] = cell.className = cell.innerHTML = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
     }
