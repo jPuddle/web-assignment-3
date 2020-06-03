@@ -45,8 +45,14 @@ function cellClicked(cell, x, y) {
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
     }
-    activePlayer = activePlayer === 1 ? 0 : 1;
+    changeActivePlayer();
   }
+}
+
+function changeActivePlayer() {
+  activePlayer = activePlayer === 1 ? 0 : 1;
+  getElementById("active-player-indicator").innerHTML =
+    symbols[activePlayer] + "'s turn.";
 }
 
 function checkWinCondition(x, y) {
