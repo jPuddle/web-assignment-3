@@ -1,6 +1,7 @@
 import "./styles.css";
 
-const board_size = 5;
+const BOARD_SIZE = 5;
+const WINNING_SCORE = 5;
 let board_state = [];
 let activePlayer = 0;
 const symbols = ["x", "o"];
@@ -21,11 +22,11 @@ function initializeCode() {
   console.log("Initializing");
 
   const board_display = document.getElementById("board");
-  for (let y = 0; y < board_size; y++) {
+  for (let y = 0; y < BOARD_SIZE; y++) {
     const row = document.createElement("TR");
     board_display.appendChild(row);
     board_state[y] = [];
-    for (let x = 0; x < board_size; x++) {
+    for (let x = 0; x < BOARD_SIZE; x++) {
       const cell = document.createElement("TD");
       row.appendChild(cell);
       board_state[y][x] = "-";
@@ -51,65 +52,53 @@ function cellClicked(button, x, y) {
 function checkWinCondition(x, y) {
   let count = 0;
   //Check horizontal
-  for (let o = -2; o <= 2; o++) {
-    if (x + o < 0 || x + o >= board_size) {
-      continue;
-    }
-    if (board_state[y][x + o] === symbols[activePlayer]) {
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    if (board_state[y][i] === symbols[activePlayer]) {
       count++;
-      if (count >= 3) {
+      if (count >= WINNING_SCORE) {
         return true;
       }
     } else {
-      count = 0;
+      break;
     }
   }
   count = 0;
 
   //Check vertical
-  for (let o = -2; o <= 2; o++) {
-    if (y + o < 0 || y + o >= board_size) {
-      continue;
-    }
-    if (board_state[y + o][x] === symbols[activePlayer]) {
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    if (board_state[i][x] === symbols[activePlayer]) {
       count++;
-      if (count >= 3) {
+      if (count >= WINNING_SCORE) {
         return true;
       }
     } else {
-      count = 0;
+      break;
     }
   }
   count = 0;
 
   //Check / diagonal
-  for (let o = -2; o <= 2; o++) {
-    if (x + o < 0 || x + o >= board_size || y + o < 0 || y + o >= board_size) {
-      continue;
-    }
-    if (board_state[y + o][x + o] === symbols[activePlayer]) {
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    if (board_state[i][i] === symbols[activePlayer]) {
       count++;
-      if (count >= 3) {
+      if (count >= WINNING_SCORE) {
         return true;
       }
     } else {
-      count = 0;
+      break;
     }
   }
   count = 0;
 
   //Check \ diagonal
-  for (let o = -2; o <= 2; o++) {
-    if (x + o < 0 || x + o >= board_size || y - o < 0 || y - o >= board_size) {
-      continue;
-    }
-    if (board_state[y - o][x + o] === symbols[activePlayer]) {
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    if (board_state[BOARD_SIZE - i - 1][i] === symbols[activePlayer]) {
       count++;
-      if (count >= 3) {
+      if (count >= WINNING_SCORE) {
         return true;
       }
     } else {
-      count = 0;
+      break;
     }
   }
 
