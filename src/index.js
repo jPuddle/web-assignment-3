@@ -3,7 +3,6 @@ import "./styles.css";
 const board_size = 5;
 let board_state = [];
 let activePlayer = 0;
-let gameRunning = false;
 const symbols = ["x", "o"];
 
 if (document.readyState !== "loading") {
@@ -37,10 +36,6 @@ function initializeCode() {
       });
     }
   }
-
-  gameRunning = true;
-  document.getElementById("titletext").innerHTML =
-    symbols[activePlayer] + "'s turn.";
 }
 
 function cellClicked(button, x, y) {
@@ -48,12 +43,8 @@ function cellClicked(button, x, y) {
     button.innerHTML = board_state[y][x] = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
-      gameRunning = false;
-    } else {
-      activePlayer = activePlayer === 1 ? 0 : 1;
-      document.getElementById("titletext").innerHTML =
-        symbols[activePlayer] + "'s turn.";
     }
+    activePlayer = activePlayer === 1 ? 0 : 1;
   }
 }
 
