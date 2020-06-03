@@ -11,7 +11,7 @@ if (document.readyState !== "loading") {
   console.log("Document ready, executing");
   initializeCode();
 } else {
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     // Document was not ready, executing when loaded
     console.log("Document ready, executing after a wait");
     initializeCode();
@@ -31,7 +31,7 @@ function initializeCode() {
       row.appendChild(cell);
       board_state[y][x] = "-";
       cell.innerHTML = board_state[y][x];
-      cell.addEventListener("mousedown", event => {
+      cell.addEventListener("mousedown", (event) => {
         cellClicked(cell, x, y);
         event.stopPropagation();
       });
@@ -47,8 +47,7 @@ function cellClicked(button, x, y) {
   if (gameRunning && board_state[y][x] === "-") {
     button.innerHTML = board_state[y][x] = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
-      document.getElementById("titletext").innerHTML =
-        symbols[activePlayer] + " wins!";
+      alert("Player " + (activePlayer + 1) + " wins!");
       gameRunning = false;
     } else {
       activePlayer = activePlayer === 1 ? 0 : 1;
