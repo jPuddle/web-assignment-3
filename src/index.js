@@ -47,7 +47,7 @@ function cellClicked(button, x, y) {
   if (gameRunning && board_state[y][x] === "-") {
     button.innerHTML = board_state[y][x] = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
-      alert("Player " + (activePlayer + 1) + " wins!");
+      alert("Player " + (activePlayer + 1) + " won!");
       gameRunning = false;
     } else {
       activePlayer = activePlayer === 1 ? 0 : 1;
