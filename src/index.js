@@ -29,7 +29,7 @@ function initializeCode() {
     for (let x = 0; x < BOARD_SIZE; x++) {
       const cell = document.createElement("TD");
       row.appendChild(cell);
-      board_state[y][x] = "-";
+      board_state[y][x] = "";
       cell.innerHTML = board_state[y][x];
       cell.addEventListener("mousedown", (event) => {
         cellClicked(cell, x, y);
@@ -39,9 +39,9 @@ function initializeCode() {
   }
 }
 
-function cellClicked(button, x, y) {
-  if (board_state[y][x] === "-") {
-    button.innerHTML = board_state[y][x] = symbols[activePlayer];
+function cellClicked(cell, x, y) {
+  if (board_state[y][x] === "") {
+    board_state[y][x] = cell.className = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
     }
