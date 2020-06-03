@@ -51,7 +51,7 @@ function cellClicked(cell, x, y) {
 
 function changeActivePlayer() {
   activePlayer = activePlayer === 1 ? 0 : 1;
-  getElementById("active-player-indicator").innerHTML =
+  document.getElementById("active-player-indicator").innerHTML =
     symbols[activePlayer] + "'s turn.";
 }
 
