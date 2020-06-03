@@ -2,9 +2,13 @@ import "./styles.css";
 
 const BOARD_SIZE = 5;
 const WINNING_SCORE = 5;
+const TURN_TIMER = 100;
 let board_state = [];
-let activePlayer = 0;
+let activePlayer = 1;
 const symbols = ["x", "o"];
+let time = TURN_TIMER;
+let timerInterval;
+let gameRunning = false;
 
 if (document.readyState !== "loading") {
   // Document ready, executing
@@ -37,22 +41,40 @@ function initializeCode() {
       });
     }
   }
+  gameRunning = true;
+  changeActivePlayer();
 }
 
 function cellClicked(cell, x, y) {
-  if (board_state[y][x] === "") {
+  if (board_state[y][x] === "" && gameRunning) {
     board_state[y][x] = cell.className = cell.innerHTML = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
+      clearInterval(timerInterval);
+      gameRunning = false;
+    } else {
+      changeActivePlayer();
     }
-    changeActivePlayer();
   }
 }
 
 function changeActivePlayer() {
+  clearInterval(timerInterval);
+  time = TURN_TIMER;
   activePlayer = activePlayer === 1 ? 0 : 1;
   document.getElementById("active-player-indicator").innerHTML =
     symbols[activePlayer] + "'s turn.";
+  timerInterval = setInterval(updateTimerBar, 100);
+  function updateTimerBar() {
+    const timerBar = document.getElementById("timer-bar");
+    time--;
+    timerBar.innerHTML = time / 10;
+    timerBar.style.width = time * 2 + "px";
+    if (time <= 0) {
+      time = TURN_TIMER;
+      changeActivePlayer();
+    }
+  }
 }
 
 function checkWinCondition(x, y) {

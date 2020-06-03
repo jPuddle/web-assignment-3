@@ -22,3 +22,10 @@ td {
 .o {
   background-color: #fa8072;
 }
+
+.timer-bar {
+  border: 1px solid black;
+  height: 40;
+  background-color: #11ff11;
+  margin-bottom: 2px;
+}
