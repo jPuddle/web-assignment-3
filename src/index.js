@@ -1,5 +1,3 @@
-import "./styles.css";
-
 const BOARD_SIZE = 5;
 const WINNING_SCORE = 5;
 const TURN_TIMER = 100;
