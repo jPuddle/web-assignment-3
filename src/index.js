@@ -27,11 +27,13 @@ function initializeCode() {
 
   const board_display = document.getElementById("board");
   for (let y = 0; y < BOARD_SIZE; y++) {
-    const row = document.createElement("TR");
+    const row = document.createElement("DIV");
+    row.className = "row";
     board_display.appendChild(row);
     board_state[y] = [];
     for (let x = 0; x < BOARD_SIZE; x++) {
-      const cell = document.createElement("TD");
+      const cell = document.createElement("DIV");
+      cell.className = "col s1";
       row.appendChild(cell);
       board_state[y][x] = "";
       cell.innerHTML = board_state[y][x];
@@ -47,7 +49,7 @@ function initializeCode() {
 
 function cellClicked(cell, x, y) {
   if (board_state[y][x] === "" && gameRunning) {
-    board_state[y][x] = cell.className = cell.innerHTML = symbols[activePlayer];
+    board_state[y][x] = cell.innerHTML = symbols[activePlayer];
     if (checkWinCondition(x, y)) {
       alert("Player " + (activePlayer + 1) + " won!");
       clearInterval(timerInterval);
